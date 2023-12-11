@@ -283,6 +283,10 @@ cat * | wc -lwmc
 # File Search
 
 ```bash
+
+#Get the files whose capabilities are set
+getcap -r / 2>/dev/null
+
 #find binary/source for command
 whereis ls
 
@@ -350,7 +354,7 @@ find / -cmin -60
 #files accesses within the last hour (60 minutes)
 find / -amin -60
 
-#This command can also be used with (+) and (-) signs to specify a file that is larger or smaller than the given size. 
+#This command can also be used with (+) and (-) signs to specify a file that is larger or smaller than the given size.
 find / -size +100M -type f 2>/dev/null
 find / -size -100M -type f 2>/dev/null
 
@@ -579,6 +583,9 @@ crontab -l
 
 #this command will run every two hours
 * */2 * * * command
+
+#To check what the jobs are run from syslog
+cat /var/log/syslog | grep CRON
 ```
 
 ### Aliases
@@ -783,7 +790,7 @@ netstat -lntu
 #-l: list ports listening and -t for tcp listeners
 netstat -lt
 
-#list network usage statistics by protocol (below) This can also be used with the -t or -u options to limit the output to a specific protocol. 
+#list network usage statistics by protocol (below) This can also be used with the -t or -u options to limit the output to a specific protocol.
 netstat -s
 
 #statustics for tcp protocol channels
@@ -798,7 +805,8 @@ netstat -i
 #-a:Dsiplay all sockets; -n:Don't resolve names; -o:Display timers
 netstat -ano
 ```
-### nmap 
+
+### nmap
 
 ```bash
 #Basic Scan: Performs a basic scan on the specified target IP address.
@@ -866,13 +874,13 @@ sudo -l
 #The id command will provide a general overview of the user’s privilege level and group memberships.
 id
 
-#Reading the /etc/passwd file can be an easy way to discover users on the system. 
+#Reading the /etc/passwd file can be an easy way to discover users on the system.
 cat /etc/passwd
 
 #just print all user names as well system or service users
 cat /etc/passwd | cut -d ":" -f 1
 
-#to get the user names only as oftentimes, they will be under home directory 
+#to get the user names only as oftentimes, they will be under home directory
 cat /etc/passwd | grep home | cut -d ":" -f 1
 
 #show system date time
@@ -928,6 +936,7 @@ http://<SERVER_IP>:80
 ```
 
 # SSH-ing
+
 ```bash
 #Connecting to a remote/another machine
 ssh -p <PORT> username@ip_addr
@@ -953,6 +962,7 @@ service ssh restart
 ```
 
 # Copy files between two different network remotely
+
 ```bash
 #copy file(s) from the host to your client (note the capital -P)
 scp -P <PORT> username@host_ip_addr:path_to_src local_dest
@@ -962,6 +972,7 @@ scp -P <PORT> local_src username@host_ip_addr:path_to_dest
 ```
 
 # Linux Firewall Command [iptables]
+
 ```bash
 #Check Current Rules:
 iptables -L
@@ -991,6 +1002,7 @@ service iptables restart
 ```
 
 # What after getting access to a machine?
+
 ```bash
 #Screen the machine automatically by LinPEAS - Linux Privilege Escalation Awesome Script
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
@@ -1002,4 +1014,3 @@ curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas
 #After all these, don't ever try this.
 sudo rm -rf ~
 ```
-
