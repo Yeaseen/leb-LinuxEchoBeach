@@ -642,7 +642,7 @@ sed '12,$d' filename.txt
 sed '/abc/d' filename.txt
 ```
 
-## Nwtworking
+## Networking
 
 ```bash
 #Check whether you have any network connection
@@ -1001,11 +1001,36 @@ service iptables stop
 service iptables restart
 ```
 
-# What after getting access to a machine?
+# What after getting access to a machine? --> Automated Enumeration
 
 ```bash
 #Screen the machine automatically by LinPEAS - Linux Privilege Escalation Awesome Script
 curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+```
+
+# Python custom environment for a specific project
+
+```bash
+# Navigate to your project directory
+cd Desktop/my_python_project
+
+# Activate the virtual environment
+source env/bin/activate
+
+#If you want to install a package only for this
+pip install hypothesis
+
+#check what the current packges are under thin env
+pip list
+
+#create python script and edit in vim
+vim script.py
+
+# Run your Python script
+python3 script.py
+
+# Deactivate the virtual environment
+deactivate
 ```
 
 # AWESOME LINUX USER
