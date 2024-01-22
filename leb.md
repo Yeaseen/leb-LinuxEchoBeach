@@ -14,13 +14,13 @@
 - `>` or `1`: standard output
 - `&` or `2`: standard error
 
-### Example Path:
+## Example Path:
 
 ```bash
 ~/Y_E_@_S_E_EN/CSE3032/Folder1$
 ```
 
-### Variables
+## Variables
 
 ```bash
 abc=7
@@ -588,15 +588,17 @@ crontab -l
 cat /var/log/syslog | grep CRON
 ```
 
-### Aliases
+# Aliases
 
 ```bash
 #Temporary alias for 'ls'
-alias what='ls'
-what
-#what command will print the list of files and folders of the current directory
+alias what=ls
 
-#For permanent change, append the alias to .bashrc
+#what command will print the list of files and folders of the current directory
+what
+
+#For permanent change, append the alias to .bashrc or .zshrc file
+echo "alias what=ls" >> ~/.bashrc
 ```
 
 # Find & Replace with Sed
@@ -642,7 +644,9 @@ sed '12,$d' filename.txt
 sed '/abc/d' filename.txt
 ```
 
-## Networking
+# Networking
+
+## Basic ip command
 
 ```bash
 #Check whether you have any network connection
@@ -651,9 +655,6 @@ ip addr
 ip a
 ip link
 ip addr show eth0
-
-#This command will show the DNS server(s) configured on your system.
-cat /etc/resolv.conf
 
 #This command will display the routing table, which includes information about how network traffic is directed.
 ip route
@@ -668,7 +669,30 @@ nmcli device show eth0
 sudo ip route add default via 192.168.56.10
 ```
 
-## connecting to wifi from linux terminal
+## DNS quries using `dig` command
+
+```bash
+#This command will show the DNS server(s) configured on your system.
+cat /etc/resolv.conf
+
+# The basic syntax is `dig @nameserver hostname`
+#Resolveing ip address of a host server manually
+#Step 1:Start querting to one of the root name servers for a hostname. It will give you some Top Level Domain name server
+dig @a.root-servers.net www.flux.uth.edu
+#Step 2:DO the same with one of the TLD servers to get some Authoritative Servers
+dig @a.edu-servers.net www.flux.uth.edu A
+#Step 3:Do the same with one of the authoritative servers to get the actual IP adddress along with aliases if any
+dig @ns2.ots.utsystem.edu www.flux.uth.edu A
+
+#Use DNS (Domain Name System) server configured in your machine to resolve the domain name to an IP address
+#Go through the ANSWER section and the last part
+dig -4 www.utah.edu
+
+#Get the mail exchange server of a host, priority of the mail server, and the ip of the mail server
+dig -4 www.utah.edu MX
+```
+
+## Connecting to wifi from linux terminal
 
 ```bash
 #For Linux
@@ -781,7 +805,7 @@ curl -O -L -r https://example.com
 
 # Scanning a network with netstat and nmap:
 
-### netstat
+## netstat
 
 ```bash
 #, displays active network connections on your system, focusing on listening (-l), port number(-n), TCP (-t) and UDP (-u) connections. Handy for checking what ports are in use and who's knocking on your network door.
@@ -806,7 +830,7 @@ netstat -i
 netstat -ano
 ```
 
-### nmap
+## nmap
 
 ```bash
 #Basic Scan: Performs a basic scan on the specified target IP address.
@@ -940,6 +964,8 @@ http://<SERVER_IP>:80
 ```bash
 #Connecting to a remote/another machine
 ssh -p <PORT> username@ip_addr
+#Or
+ssh -p <PORT> username@hostname
 
 #Set-up client for SSH-ing to host
 #Step-1: Generate a public-private key pair
@@ -956,7 +982,7 @@ ssh-copy-id <username>@<hostname>
 #-->How to modify default SSH port 22 to something new: change in SSH configuration file
 nano /etc/ssh/sshd_config
 #Look for the line that starts with Port. It will specify the port number that SSH is configured to use.
-#Change it by replacing 22 with your NEW_PORT
+#Change it by replacing 22 with your NEW_PORT and restart ssh service
 Port <NEW_PORT>
 service ssh restart
 ```
@@ -1033,9 +1059,87 @@ python3 script.py
 deactivate
 ```
 
+# Git and GitHub
+
+Setup git locally. Open an account on GitHub. And set GitHub username and email locally.
+
+# Basic git commands
+
+```bash
+#Displays the state of the working directory and the staging area. It shows which changes have been staged, which haven't, and which files aren't being tracked by Git.
+git status
+
+#Just press 'q' to quit the prcoess of the following commands
+#To retrieve all the commit hashes with details in a Git repository, you can use:
+git log
+##To retrieve only all the commit hashes in a Git repository, you can use:
+git log --pretty=format:"%H"
+
+#You can make changes. And You can see the differences
+git diff <file_name>
+git diff <commitHash1> <commitHash2> -- README.md
+git diff <branch1> <branch2>
+
+#Lists all the branches in your repository
+git branch
+
+#Adding a branch name after git branch creates a new branch.
+git branch [branch_name]
+
+#Switches to the specified branch and updates the working directory.
+git checkout [branch_name]
+
+#running git tag lists all the tags in the repository
+git tag
+#create simple tag( like pointer or bookmark to a specific commit)
+git tag <tagname>
+#Delete a tag
+git tag -d <tagname>
+#Tags are not automatically pushed to a remote server with git push
+git push origin <tagname>  #one tage
+#Or
+git push --tags  #all tags
+
+#To see the most recent commit:
+git show HEAD
+#Use --stat to get a summary of the changes (how many lines were added/removed) without the full diff
+git show --stat <commitHash>
+```
+
+## What's here
+
+```bash
+
+#Initialize a new Git local repo && Add the remote GitHub repository:
+git init
+git remote add origin https://github.com/username/repository.git
+#Or
+#Create a copy of an existing GitHub repository, i.e., download a repository from an existing URL.
+git clone [git_url]
+
+#Do your work. You can see the differences
+#Now Stage all the changes or a specific file
+#This stages all changes in the entire repository, regardless of the current directory.
+git add -A
+#If you want to revert this stage:
+git reset
+
+#Commit your Staged
+git commit -m "your_message"
+#If you want to undo the commit but keep all changes staged, you can use a 'soft' reset.
+git reset --soft HEAD~1
+#Mixed reset: If you want to undo the commit and unstage the changes (return them to your working directory):
+git reset --mixed HEAD~1
+#If you want to undo the commit and completely remove all changes:
+git reset --hard HEAD~1
+
+#Push the commit to a remote GitHub server
+git push -u origin <branch_name>
+```
+
 # AWESOME LINUX USER
 
 ```bash
-#After all these, don't ever try this.
+#After all these, DO NOT EVER TRY TO RUN THIS.
 sudo rm -rf ~
 ```
