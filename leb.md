@@ -678,11 +678,11 @@ cat /etc/resolv.conf
 # The basic syntax is `dig @nameserver hostname`
 #Resolveing ip address of a host server manually
 #Step 1:Start querting to one of the root name servers for a hostname. It will give you some Top Level Domain name server
-dig @a.root-servers.net www.flux.uth.edu
+dig @a.root-servers.net www.flux.utah.edu
 #Step 2:DO the same with one of the TLD servers to get some Authoritative Servers
-dig @a.edu-servers.net www.flux.uth.edu A
+dig @c.edu-servers.net www.flux.utah.edu A
 #Step 3:Do the same with one of the authoritative servers to get the actual IP adddress along with aliases if any
-dig @ns2.ots.utsystem.edu www.flux.uth.edu A
+dig @ns2.flux.utah.edu www.flux.utah.edu A
 
 #Use DNS (Domain Name System) server configured in your machine to resolve the domain name to an IP address
 #Go through the ANSWER section and the last part
