@@ -33,7 +33,7 @@ echo "$abc"
 - `*`: all files and folders in the current location
 
 ```bash
-myfiles=(\*)
+myfiles=(*)
 echo "$myfiles"
 echo "{myfiles[0]}"
 echo "${myfiles[0]}"
@@ -957,6 +957,12 @@ wget http://<SERVER_IP>/<file_name>
 #Access the server from another machine:
 #Open a web browser on the second machine and enter the IP address or hostname of the first machine, followed by the port number.
 http://<SERVER_IP>:80
+```
+
+# Client <---> Custom ProxyServer <---> Server
+
+```bash
+#updating soon
 ```
 
 # SSH-ing
