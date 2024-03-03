@@ -880,11 +880,23 @@ unzip archive.zip
 unzip archive.zip -d /path/to/destination/
 ```
 
-# Special Commands
+# Special Commands for getting details regarding the SYSTEM
 
 ```bash
 #Will print system information giving us additional detail about the kernel used by the system
 uname -a
+
+#The following command to view the amount of free and used memory in the system
+free -h
+
+#For specific information related to all levels of cache memory
+lscpu | grep -i cache
+
+#The lscpu command in Linux displays information about the CPU architecture. It gathers CPU architecture information from sysfs and /proc/cpuinfo.
+lscpu
+
+#This command displays the content of the /etc/os-release file, which includes human-readable operating system identification data.
+cat /etc/os-release
 
 #The proc filesystem (procfs) provides information about the target system processes
 cat /proc/version
@@ -1090,10 +1102,13 @@ git diff <branch1> <branch2>
 git branch
 
 #Adding a branch name after git branch creates a new branch.
-git branch [branch_name]
+git branch <new_branch_name>
 
-#Switches to the specified branch and updates the working directory.
-git checkout [branch_name]
+#Creates a new branch and swithces to that new branch
+git checkout -b <new_branch_name>
+
+#if you want to create a new branch based on an existing branch such as `dev`
+git checkout -b <new_branch_name> dev
 
 #running git tag lists all the tags in the repository
 git tag
