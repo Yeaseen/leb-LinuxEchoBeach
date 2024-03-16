@@ -1058,8 +1058,11 @@ curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas
 # Navigate to your project directory
 cd Desktop/my_python_project
 
+#Create a virtual environment
+python3 -m venv <env_name>
+
 # Activate the virtual environment
-source env/bin/activate
+source <env_name>/bin/activate
 
 #If you want to install a package only for this
 pip install hypothesis
