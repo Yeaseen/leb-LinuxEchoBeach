@@ -542,8 +542,11 @@ top
 #An interactive process viewer.
 htop
 
-#Forcefully terminate a process.
+#Forcefully terminate a process with a proces ID.
 kill -9 5678
+
+#Forcefully terminate a series of process of cxgo
+ps aux | grep cxgo | grep -v grep | awk '{print $2}' | xargs kill -9
 ```
 
 ## Resource Usages
@@ -915,6 +918,9 @@ cat /etc/passwd
 
 #just print all user names as well system or service users
 cat /etc/passwd | cut -d ":" -f 1
+
+#print the second column of a csv file
+cut -d',' -f2 <file_name>.csv
 
 #to get the user names only as oftentimes, they will be under home directory
 cat /etc/passwd | grep home | cut -d ":" -f 1
